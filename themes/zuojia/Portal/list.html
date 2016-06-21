@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>{$site_seo_title} {$site_name}</title>
+		<meta name="keywords" content="{$site_seo_keywords}" />
+		<meta name="description" content="{$site_seo_description}">
+		<tc_include file="Public:head" />
+		<!--
+		<link href="__TMPL__Public/css/page.css" rel="stylesheet">
+		<link href="__TMPL__Public/css/static.css" rel="stylesheet">
+		<script src="__TMPL__Public/js/picture.js"  type="text/javascript"></script>
+		<script src="__TMPL__Public/js/pageChange.js"  type="text/javascript"></script>
+		<script src="__TMPL__Public/js/jquery1.7.js" type="text/javascript"></script>
+	    <script src="__TMPL__Public/js/reg.js" type="text/javascript"></script>
+	    <script src="__TMPL__Public/js/myjs.js" type="text/javascript"></script>
+	    -->
+	</head>
+<body class="body-white">
+ <tc_include file="Public:nav" />   		<!-- 引入文件 -->
+ 	<div style="width:1100px;margin:0 auto;">
+
+	    <style type="text/css">
+	        .list li{height:30px;line-height:30px;}
+	        .list p{background:url(__TMPL__Public/images/pic5.png) no-repeat 0 11px;padding:0px 0px 0px 14px;width:600px;color:#666;float:left;}
+	        .list span{color:#666;font-size:14px;float:right;padding-right:5px;}
+	        .list a{color:#666;font-size:14px;}
+	        .list a:hover{color:#CE0808;}
+	        .home a{color:#666;}
+	        .home a:hover{color:#CE0808;}
+	    </style>
+
+	    <div style="float:left;width:750px;padding:10px;">
+		    <div class="home" style="height:40px;line-height:40px;">您现在的位置：<A href="./">首页</A>  > <A>{$name}</A></div>
+		    <div style=" text-align:center;height:50px;line-height:50px;font-size:20px;font-weight:bold;"><h2>{$name}</h2></div>
+		    <div style="border-bottom:1px solid #dcdcdc;">
+		    	<h3>{$name}</h3>
+		    </div>
+	      <php>
+				$lists = sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;",10);
+			</php>
+			<volist name="lists['posts']" id="vo">
+				<php>
+					$smeta=json_decode($vo['smeta'], true);
+				</php>
+				<ul>
+					<li style="margin:5px 0">
+						*<a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a>
+						<span style="float:right;">{$vo.post_date}</span>
+					</li>
+        </ul>
+      </volist>
+
+		    <div style="clear:both;"></div>
+
+		    <div style="min-height:300px;width:100%;">
+		     <div class="list" style="padding:10px;">
+		     <ul id="infobox">
+
+		     </ul>
+		     </div>
+		     <div style="clear:both;"></div>
+             <div class="pagination"><ul>{$lists['page']}</ul></div>
+	        </div>
+
+           </div>
+
+    <div style="float:right;margin-right:10px;margin-top:70px;">
+
+       <div style="width:270px;border:1px solid #EBC199;">
+        <div style="height:3px; background:#964b08;"></div>
+         <a href="#" style=" text-decoration:none;">
+       <div style="background:url(__TMPL__Public/images/20160331165043128.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#fff;line-height:46px;">
+        <span style="padding-left:20px;">精彩推荐</span>
+        </div>
+        </a>
+
+        <div class="ztbd" style="padding:10px;">
+
+                     <p><a href="#" title='《广东省作家协会入会申请表》和入会申请须知（2009年）'><span style="color:#CE0808;">[荐]</span>《广东省作家协会入会申请表》和入会申请须知（2009年）</a></p>
+
+                     <p><a href="#" title='余华:我是怎么从牙医成为作家的 测试长度 看看多长 可以支持'><span style="color:#CE0808;">[荐]</span>余华:我是怎么从牙医成为作家的 测试长度 看看多长 可以支持</a></p>
+
+                     <p><a href="#" title='34 咏春无须赞改革，且用我手写我心666'><span style="color:#CE0808;">[荐]</span>34 咏春无须赞改革，且用我手写我心666</a></p>
+
+                     <p><a href="#" title='21老师年终作鉴定 全班尽是好学生'><span style="color:#CE0808;">[荐]</span>21老师年终作鉴定 全班尽是好学生</a></p>
+
+                     <p><a href="#" title='关于2015年度文学创作一、二、三级作家资格评审结果公示的函'><span style="color:#CE0808;">[荐]</span>关于2015年度文学创作一、二、三级作家资格评审结果公示的函</a></p>
+
+                     <p><a href="#" title='“2015广东省高等院校校园作家杯”终评获奖作品目录公示'><span style="color:#CE0808;">[荐]</span>“2015广东省高等院校校园作家杯”终评获奖作品目录公示</a></p>
+
+                     <p><a href="#" title='王蒙、陈国凯、金敬迈、吕雷……萧殷与他培养的作家们'><span style="color:#CE0808;">[荐]</span>王蒙、陈国凯、金敬迈、吕雷……萧殷与他培养的作家们</a></p>
+
+                     <p><a href="#" title='反思&nbsp;坚守&nbsp;创新——刘醒龙、吴思敬、杨克、施战军谈文学期刊的生存与发展'><span style="color:#CE0808;">[荐]</span>反思&nbsp;坚守&nbsp;创新——刘醒龙、吴思敬、杨克、施战军谈文学期刊的生存与发展</a></p>
+
+
+        </div>
+       </div>
+       <div style="width:270px;border:1px solid #EBC199;margin-top:20px;">
+        <div style="height:3px; background:#964b08;"></div>
+         <a href="#" style=" text-decoration:none;">
+       <div style="background:url(__TMPL__Public/images/20160331165115878.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+        <span style="padding-left:20px;">热门推荐</span>
+        </div>
+        </a>
+
+        <div class="ztbd" style="padding:10px;">
+
+                     <p><a href="#" title='《广东省作家协会入会申请表》和入会申请须知（2009年）'><span style="color:red;">[热]</span>《广东省作家协会入会申请表》和入会申请须知（2009年）</a></p>
+
+                     <p><a href="#" title='34 咏春无须赞改革，且用我手写我心666'><span style="color:red;">[热]</span>34 咏春无须赞改革，且用我手写我心666</a></p>
+
+                     <p><a href="#" title='21老师年终作鉴定 全班尽是好学生'><span style="color:red;">[热]</span>21老师年终作鉴定 全班尽是好学生</a></p>
+
+                     <p><a href="#" title='关于2015年度文学创作一、二、三级作家资格评审结果公示的函'><span style="color:red;">[热]</span>关于2015年度文学创作一、二、三级作家资格评审结果公示的函</a></p>
+
+                     <p><a href="#" title='“2015广东省高等院校校园作家杯”终评获奖作品目录公示'><span style="color:red;">[热]</span>“2015广东省高等院校校园作家杯”终评获奖作品目录公示</a></p>
+
+                     <p><a href="#" title='孙丽生长篇小说《寒门子弟》面世'><span style="color:red;">[热]</span>孙丽生长篇小说《寒门子弟》面世</a></p>
+
+                     <p><a href="#" title='岭南大家，艺术长青——第二届广东文艺终身成就奖特刊'><span style="color:red;">[热]</span>岭南大家，艺术长青——第二届广东文艺终身成就奖特刊</a></p>
+
+                     <p><a href="#" title='广东省首个“文学之城”落户南海'><span style="color:red;">[热]</span>广东省首个“文学之城”落户南海</a></p>
+
+        </div>
+       </div>
+    </div>
+
+    <div style="clear:both;"></div>
+
+
+    <div style="clear:both;height:20px"></div>
+    <tc_include file="Public:footer"/>
+  </div>
+
+</body>
+</html>

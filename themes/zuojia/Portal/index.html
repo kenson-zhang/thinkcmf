@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>{$site_seo_title} {$site_name}</title>
+		<meta name="keywords" content="{$site_seo_keywords}" />
+		<meta name="description" content="{$site_seo_description}">
+		<tc_include file="Public:head" />
+<body>
+    <tc_include file="Public:nav" />
+      <div style="clear:both;"></div>
+
+     <div style="width:1100px;margin:0 auto;">
+    <style type="text/css">
+    /* play */
+    .play{width:398px;height:270px;overflow:hidden;position:relative;margin:0px auto;}
+    .play ol{position:absolute;bottom:31px;z-index:99999;right:5px; }
+    .play ol li{list-style:none;float:left;height:25px;width:25px;display:inline;cursor:pointer;margin-left:5px; text-align:center; line-height:25px; background-color:#444444;color:#fff;font-size:12px;}
+    .play ol li.active{font-weight:bold;color:#ffffff;background-color:#E5B07C;position:relative;}
+    .play ul{position:absolute;top:0;left:0;z-index:1;padding:0;margin:0;}
+    .play ul li{width:398px;height:270px;float:left;list-style:none; }
+    .play ul img{float:left;height:100%;width:100%; border:none;}
+    .play ul div{height:30px;line-height:30px;width:393px;overflow:hidden;color:#fff;padding-left:5px;position:absolute;bottom:0;background:#5E5E5E; filter:alpha(opacity=50);-moz-opacity:0.7; -khtml-opacity: 0.7;opacity: 0.7;}
+    .play ul p{height:30px;line-height:30px;width:380px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
+
+
+
+    .lhx p{background:url('__TMPL__Public/images/pic5.png') no-repeat 0 7px;padding:1px 0 7px 14px;color:#666;height:38px;line-height:22px; overflow:hidden;margin-top:5px;margin-bottom:5px;}
+    .lhx a{color:#666;font-size:14px;}
+    .lhx a:hover{color:#CE0808;}
+
+    .news p{background:url('__TMPL__Public/images/pic5.png') no-repeat 0 7px;padding:1px 0 0px 14px;color:#666;max-height:40px;margin-bottom:3px;line-height:22px; overflow:hidden;}
+    .news a{color:#666;font-size:14px;}
+    .news a:hover{color:#CE0808;}
+
+
+    .anone{color:#873D0B;}
+    .anone:hover{color:#873D0B;}
+    img{border:none;}
+    </style>
+
+
+
+    <div style="width:1100px;height:472px;">
+        <div style="float:left;width:398px;height:465px;border:1px solid #EBC199;">
+            <div class="play" id="play" >
+            	<ol></ol>
+                <php>
+                  $home_slides=sp_getslide("portal_index");
+
+                  $home_slides=empty($home_slides)?$default_home_slides:$home_slides;
+                </php>
+                <ul id="homeslider" class="unstyled">
+                    <foreach name="home_slides" item="vo">
+                    <li>
+                        <div class="caption-wraper">
+                            <div class="caption">{$vo.slide_name}</div>
+                        </div>
+                        <a href="{$vo.slide_url}"><img src="{:sp_get_asset_upload_path($vo['slide_pic'])}" alt=""></a>
+                    </li>
+                    </foreach>
+                </ul>
+           </div>
+
+           <div style="float:left;width:196px;height:280px;">
+
+                    <p style="height:30px;line-height:30px; text-align:center; color:#873D0B;border-bottom:1px dashed #dcdcdc;font-weight:bold;font-size:16px;margin-right:5px;">精彩推荐</p>
+          <div class="lhx" style="padding:5px;width:185px;height:155px; overflow:hidden;">
+										<php>
+ 									      $hot_articles=sp_sql_posts("cid:$portal_hot_articles;field:post_title,post_excerpt,tid,term_id,smeta;order:post_hits desc;limit:5;");
+ 								    </php>
+ 											 <foreach name="hot_articles" item="vo">
+ 												 <php>$top=$key<3?"top3":"";</php>
+
+												 <p><i>{$key+1}</i><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title='{$vo.post_title}'>{$vo.post_title}</a></p>
+ 									     </foreach>
+                    </div>
+           </div>
+           <!-- 作协动态 -->
+          <div style="float:right;width:196px;height:200px;">
+          <p style="height:30px;line-height:30px; text-align:center; color:#666;border-bottom:1px dashed #dcdcdc;font-weight:bold;font-size:16px;margin-left:5px;">
+         <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[5]}">{$term[5]['name']}</a>
+          </p>
+          <div class="lhx" style="padding:5px;width:185px;height:155px; overflow:hidden;">
+      			<php>
+      			$lists = sp_sql_posts_paged("cid:$cat_id[5];order:post_date DESC;",10);
+      			</php>
+      			<volist name="lists['posts']" id="vo">
+      				 <php>
+      					 $smeta=json_decode($vo['smeta'], true);
+      				 </php>
+      				 <ul>
+      					 <li style="margin:5px 0">
+      						 <p><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title='{$vo.post_title}'>{$vo.post_title}</a></p>
+      					 </li>
+      					</ul>
+      		</volist>
+          </div>
+          </div>
+    </div>
+
+   <!-- 上中盒子 -->
+    <div style="float:left;width:420px;height:467px;margin:0 15px;background:#F7F2EC; overflow:hidden;">
+
+      <div style=" height:125px;width:410px;margin-top:10px; margin-bottom:20px;">
+      <php>
+            $lists = sp_sql_posts_paged("cid:$cat_id[12];order:post_date DESC;",10);
+            </php>
+            <volist name="lists['posts']" id="vo">
+                 <php>
+                     $smeta=json_decode($vo['smeta'], true);
+                 </php>
+
+                 <ul>
+                     <li style="margin:5px 0">
+                         <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+             <a style="color:#873D0B;" href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                         </p>
+                         <div style="height:86px;width:410px; color:#666;font-size:13px;padding:5px; line-height:22px;">
+                             {$vo.post_excerpt}
+                            <a style='color:#873D0B;text-decoration:none;' href='{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}'>...【详细】</a>
+                             </div>
+                     </li>
+
+                    </ul>
+        </volist>
+
+    
+
+      </div>
+
+    </div>
+    
+    <!-- 公告与下载 -->
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:465px;">
+        <div style="height:3px; background:#964b08;"></div>
+        <a href="./index.php?m=list&a=index&id={$cat_id[10]}" style=" text-decoration:none;">
+       <div style="background:url(__TMPL__Public/images/20160331164822667.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+        <span style="padding-left:20px;">{$term[9]['name']}</span>
+        </div>
+        </a>
+
+    	    <div class="ztbd" style="padding:8px;width:232px;height:400px; overflow:hidden;">
+
+    		    <php>
+    			  $lists = sp_sql_posts_paged("cid:$cat_id[9];order:post_date DESC;",10);
+    		    </php>
+    		    <volist name="lists['posts']" id="vo">
+    					 <php>
+    						 $smeta=json_decode($vo['smeta'], true);
+    					 </php>
+    					 <ul>
+    						 <li style="margin:5px 0">
+    							 *<a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+    						 </li>
+    	          </ul>
+    			</volist>
+    	    </div>
+    </div>
+</div>
+    <div style="clear:both;"></div>
+
+    <div style="margin-top:10px;width:1100px;height:100px;">
+    <a href="http://baidu.com"><img src="__TMPL__Public/picture/20160331164258988.png" style="width:833px;height:100px;border:none;float:left;" /></a>
+    <a href=""> <img src="__TMPL__Public/picture/20160331164720218.png" style="width:250px;height:100px;float:right;"></a>
+    </div>
+
+    <div style="clear:both;"></div>
+    <div style="width:840px;margin-top:10px;float:left;">
+    <div style="float:left;">
+    <div style="width:580px;float:left;height:585px;margin-right:20px; overflow :hidden;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[0]}">{$term[1]['name']}</a>
+    <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span>
+     <div style="float:left;background:#EFE7DC;width:580px;height:4px;"></div>
+
+    </p>
+  <php>
+      $lists = sp_sql_posts_paged("cid:$cat_id[10];order:post_date DESC;",10);
+  </php>
+  <volist name="lists['posts']" id="vo">
+      <php>
+           $smeta=json_decode($vo['smeta'], true);
+      </php>
+    <div style="width:580px;height:130px;padding:10px 5px 0 5px;">
+        <div style="float:left;width:150px;height:130px;"> 
+        <img src="./data/upload/{$smeta['thumb']}" style="width:150px;height:110px;margin-top:8px;" />
+        </div>
+        <div style="width:420px;float:left;padding-left:10px;">
+				 <ul>
+					 <li style="margin:5px 0">
+						 <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+             <a style="color:#873D0B;" href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+						 </p>
+						 <div style="height:86px;width:410px; color:#666;font-size:13px;padding:5px; line-height:22px;">
+							 {$vo.post_excerpt}
+							<a style='color:#873D0B;text-decoration:none;' href='{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}'>...【详细】</a>
+							 </div>
+					 </li>
+					</ul>
+        </div>
+        <div style="margin-top:-8px;width:575px;border-bottom:1px dashed #dcdcdc;"></div>
+    </div>
+  </volist>
+
+    </div>
+
+
+    <div style="width:230px;float:left;">
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[10]}">{$term[10]['name']}</a>
+     <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span>
+    <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+     <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+			 <php>
+			 $lists = sp_sql_posts_paged("cid:$cat_id[10];order:post_date DESC;",10);
+			 </php>
+			 <volist name="lists['posts']" id="vo">
+					<php>
+						$smeta=json_decode($vo['smeta'], true);
+					</php>
+					<ul>
+						<li style="margin:5px 0">
+						<p>
+							<a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+            </p>
+						</li>
+					 </ul>
+		 </volist>
+
+    </div>
+    </div>
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[11]}">{$term[11]['name']}</a>
+     <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span>
+   <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+     <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+        
+        <php>
+             $lists = sp_sql_posts_paged("cid:$cat_id[11];order:post_date DESC;",10);
+             </php>
+             <volist name="lists['posts']" id="vo">
+                    <php>
+                        $smeta=json_decode($vo['smeta'], true);
+                    </php>
+                    <ul>
+                        <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+            </p>
+                        </li>
+                     </ul>
+         </volist>
+       
+
+
+    </div>
+    </div>
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[13]}">{$term[13]['name']}</a>
+    <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span>
+    <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+    <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+
+        <php>
+             $lists = sp_sql_posts_paged("cid:$cat_id[13];order:post_date DESC;",10);
+             </php>
+             <volist name="lists['posts']" id="vo">
+                    <php>
+                        $smeta=json_decode($vo['smeta'], true);
+                    </php>
+                    <ul>
+                        <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+            </p>
+                        </li>
+                     </ul>
+         </volist>
+
+
+    </div>
+    </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div style="margin-top:10px;width:833px;height:100px;margin-top:10px;">
+    <a href="http://www.sougou.com"><img src="__TMPL__Public/picture/20160331164258988.png" style="width:833px;height:100px;border:none;float:left;" /></a>
+    </div>
+     </div>
+
+    <div style="width:835px;float:left;margin-top:10px;">
+    <div style="float:left;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[14]}">{$term[14]['name']}</a>
+    <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span>
+   <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+
+         <php>
+             $lists = sp_sql_posts_paged("cid:$cat_id[14];order:post_date DESC;",10);
+             </php>
+             <volist name="lists['posts']" id="vo">
+                    <php>
+                        $smeta=json_decode($vo['smeta'], true);
+                    </php>
+                    <ul>
+                        <li style="margin:5px 0">
+                            <p>
+                                <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                            </p>
+                        </li>
+                     </ul>
+         </volist>
+
+
+
+
+
+    </div>
+    </div>
+    <div style="float:right;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[14]}">{$term[15]['name']}</a>
+    <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span>
+  <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+
+        <php>
+             $lists = sp_sql_posts_paged("cid:$cat_id[15];order:post_date DESC;",10);
+             </php>
+             <volist name="lists['posts']" id="vo">
+                    <php>
+                        $smeta=json_decode($vo['smeta'], true);
+                    </php>
+                    <ul>
+                        <li style="margin:5px 0">
+                            <p>
+                                <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                            </p>
+                        </li>
+                     </ul>
+         </volist>
+
+
+    </div>
+    </div>
+    <div style="float:left;width:430px;height:270px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[16]}">{$term[16]['name']}</a>
+    <span style="background:url('__TMPL__Public/images/pic1.png') no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span>
+    <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+
+      <php>
+             $lists = sp_sql_posts_paged("cid:$cat_id[16];order:post_date DESC;",10);
+             </php>
+             <volist name="lists['posts']" id="vo">
+                    <php>
+                        $smeta=json_decode($vo['smeta'], true);
+                    </php>
+                    <ul>
+                        <li style="margin:5px 0">
+                            <p>
+                                <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                            </p>
+                        </li>
+                     </ul>
+         </volist>
+
+
+
+
+    </div>
+    </div>
+    <div style="float:right;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="./index.php?m=list&a=index&id={$cat_id[7]}">{$term[7]['name']}</a>
+    <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span>
+    <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+     <p style="height:30px;line-height:38px;color:#666;font-size:12px;font-weight:bold;margin-right:10px;margin-left:10px;">
+    <a class="anone" href="#" style="margin-right:30px;">作品</a>
+    <a class="anone" href="#" style="margin-right:30px;">作品1</a>
+    <a class="anone" href="#" style="margin-right:30px;">作品2</a>
+    <a class="anone" href="#" style="margin-right:30px;">作品3</a>
+
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:7px;padding-left:0px;width:410px;height:197px; overflow:hidden;">
+
+        <php>
+         $lists = sp_sql_posts_paged("cid:$cat_id[7];order:post_date DESC;",10);
+         </php>
+         <volist name="lists['posts']" id="vo">
+                <php>
+                    $smeta=json_decode($vo['smeta'], true);
+                </php>
+                <ul>
+                    <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                        </p>
+                    </li>
+                 </ul>
+         </volist>
+
+
+    </div>
+    </div>
+
+    </div>
+
+
+    </div>
+
+
+    <div style="width:250px;margin-top:10px;float:right;">
+    <div style="width:250px;float:left;">
+      <!-- 新书架 -->
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:433px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="./index.php?m=list&a=index&id={$cat_id[17]}" style=" text-decoration:none;">
+   <div style="background:url(__TMPL__Public/images/20160401103118686.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">{$term[17]['name']}</span>
+
+    </div>
+    </a>
+   <div style="width:250px;height:125px;">
+   <table cellspacing="0" id="ContentPlaceHolder1_FormView1" style="border-collapse:collapse;">
+	<tr>
+		<td colspan="2">
+  <div style="float:left;">
+       <php>
+         $lists = sp_sql_posts_paged("cid:$cat_id[17];order:post_date DESC;",10);
+      
+       </php>
+          <php>
+            $vo = $lists['posts'][0]; 
+            $smeta=json_decode($vo['smeta'], true);
+          </php>
+         <img src="./data/upload/{$smeta['thumb']}" onerror="this.src='__TMPL__Public/images/defualt.jpg'" style="width:90px;height:120px;margin-left:8px;margin-top:8px;" />
+    </div>
+    <div style="float:right;width:150px;padding-top:6px;height:50px;">
+   
+          <ul>
+            <li style="margin:5px 0">
+              <p style="padding:0 5px;line-height:18px;"><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" style="color:#873D0B;font-size:14px;font-weight:bold;" title="{$vo.post_title}">{$vo['post_title']}</a>
+              </p>
+             <p style="color:#666;font-size:10px;line-height:21px;width:140px;height:85px;padding:0 5px; overflow:hidden;"> <span>{$vo['post_excerpt']}</span><a style='color:#873D0B;text-decoration:none;' href='{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}'>...【详细】</a> </p>
+             
+            </li>
+           </ul>
+    
+    </div>
+    </td>
+	</tr>
+</table>
+    </div>
+    <div class="ztbd" style="padding:8px;margin-top:2px;">
+     
+        <php>
+         $list = sp_sql_posts_paged("cid:$cat_id[17];order:post_date DESC;",10);
+         </php>
+         <volist name="list['posts']" id="vo2">
+                <ul>
+                    <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo2['tid'],'cid'=>$vo2['term_id']))}" title="{$vo2.post_title}">{$vo2.post_title}</a>
+                        </p>
+                    </li>
+                 </ul>
+         </volist>
+
+      
+
+
+    </div>
+ 
+     </div>
+
+    <!-- 作家动态 -->
+     <div style="float:left;border:1px solid #EBC199;width:248px;height:400px;margin-top:15px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="./index.php?m=list&a=index&id={$cat_id[18]}" style=" text-decoration:none;">
+   <div style="background:url(__TMPL__Public/images/20160331164850375.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">{$term[18]['name']}</span>
+    </div>
+    </a>
+
+    <div class="ztbd" style="padding:8px;">
+
+        
+        <php>
+         $lists = sp_sql_posts_paged("cid:$cat_id[18];order:post_date DESC;",10);
+         </php>
+         <volist name="lists['posts']" id="vo">
+                <php>
+                    $smeta=json_decode($vo['smeta'], true);
+                </php>
+                <ul>
+                    <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                        </p>
+                    </li>
+                 </ul>
+         </volist>
+
+    </div>
+
+     </div>
+     </div>
+
+    <!-- 文学现场 -->
+    <div style="float:right;width:250px;margin-top:15px;">
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:400px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="./index.php?m=list&a=index&id={$cat_id[19]}" style=" text-decoration:none;">
+   <div style="background:url(__TMPL__Public/images/20160331164901342.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">{$term[19]['name']}</span>
+    </div>
+    </a>
+
+    <div class="ztbd" style="padding:8px;">
+
+        
+        <php>
+         $lists = sp_sql_posts_paged("cid:$cat_id[19];order:post_date DESC;",10);
+         </php>
+         <volist name="lists['posts']" id="vo">
+                <php>
+                    $smeta=json_decode($vo['smeta'], true);
+                </php>
+                <ul>
+                    <li style="margin:5px 0">
+                        <p>
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">{$vo.post_title}</a>
+                        </p>
+                    </li>
+                 </ul>
+         </volist>
+
+
+    </div>
+
+     </div>
+
+
+    </div>
+
+   </div>
+
+
+    </div>
+<tc_include file="Public:footer"/>
+<tc_include file="Public:scripts"/>
+{:hook('footer_end')}
+</div>
+
+
+</body>
+</html>

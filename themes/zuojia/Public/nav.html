@@ -1,0 +1,77 @@
+{:hook('body_start')}
+<div style="width:1100px;margin:0 auto;padding:0 10px;">
+
+    <div style=" background:url(__TMPL__Public/images/topbg22.jpg) no-repeat;height:150px;width:1100px;">
+    <div style="height:105px;width:860px;background:url(__TMPL__Public/images/topbg2.jpg) no-repeat; position:relative;left:260px;top:40px;">
+    <div class="top1" style="height:75px;color:#873D0B;">
+    <div style="width:175px;height:75px;line-height:75px;text-align:center;font-size:16px;font-weight:bold;float:left;">
+    <a href=".">网站首页</a>
+    </div>
+    
+    <div style="width:546px;height:46px;line-height:24px;margin-top:8px;font-size:15px;font-weight:bold;float:left; text-align:center;">
+        
+      <?php
+        $effected_id="main-menu";
+        $filetpl="<div style='height:20px;width:109px;float:left;margin-top:5px'><a href='\$href' target='\$target'>\$label</a>";
+        $foldertpl="</div>";
+        $ul_class="" ;
+        $li_class="" ;
+        $style="";
+        $showlevel=6;
+        $dropdown='';
+        echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown);
+     ?>
+    </div>
+
+
+    <div style="width:109px;padding-top:15px;padding-left:5px;text-align:center;font-size:15px;font-weight:bold;float:left;">
+    <a href="#">广东残联爱心文学专页</a>
+    </div>
+    </div>
+
+
+
+
+      <div class="top2" style="height:30px;line-height:30px;">
+        <p><a href="javascript:;" onclick="JavaScript:window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.gdzuoxxie.com/');" class="hei12">设为首页</a></p>
+        <p><a href="javascript:;" onclick="JavaScript:window.external.addFavorite('http://www.gdzuoxxie.com/','广东作家协会');" class="hei12">加入收藏</a></p>
+        <p><a href="List.aspx?tyid=6">网站公告</a></p>
+
+        <div style="float:right;width:420px;margin-top:-2px;margin-right:10px;">
+         <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;"></span> 
+         <span style="margin-left:10px;font-size:16px; font-weight:bold;color:#666;">站内搜索</span>
+          <form method="post" class="form-inline" action="{:U('portal/search/index')}" style="margin:-27px 5px;">
+               <span style="margin-left:140px;">
+                <input type="text" style="width:200px;" placeholder="Search" name="keyword" value="{:I('get.keyword')}"/>
+               </span>
+               <span>
+                <input type="submit" value="搜索" style="margin-left:5px;padding:1px 10px;color:#fff; border:1px solid #873D0B; background:#E5B07C; cursor:pointer; "/>
+               </span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+    <div style="background:url(__TMPL__Public/images/topbg3.jpg) no-repeat;height:33px;width:1100px;margin:0 auto;margin-bottom:13px;">
+    <div class="wxzt" style="height:33px;line-height:30px;width:1100px; font-size:14px;color:#873D0B;">
+    <span style="font-size:16px;padding-left:15px;">文学专题：</span>
+        
+        <span style="padding-right:20px;"><a href="">第二届“桂成杯”诗歌奖</a></span>
+        
+        <span style="padding-right:20px;"><a href="">文学进校园</a></span>
+        
+        <span style="./index.php?m=list&a=index&id={$cat_id[9]}"><a href="">{$term[12]['name']}</a></span>
+        
+    </div>
+    <div style="height:30px;line-height:30px;width:1100px;font-size:14px;color:#873D0B; ">
+   
+   <div id="login1" style="float:left;width:650px;"> 
+    
+   <span style="background:url(__TMPL__Public/images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;"></span>
+   <span id="mylogin" style="margin-left:10px;padding:1px 10px;color:#fff; border:1px solid #873D0B; background:#E5B07C; cursor:pointer; "><a href="{:leuu('user/login/index')}"><i class="fa fa-sign-in"></i> &nbsp;登录</a></span>
+   <span style="margin-left:10px;"><a href="{:leuu('user/register/index')}"><i class="fa fa-user"></i> &nbsp;注册</a></span>
+   <span style="margin-left:10px;"><a href="#" style="color:#CE0808">忘了密码？</a></span> 
+   </div>
+    </div>
+    </div>

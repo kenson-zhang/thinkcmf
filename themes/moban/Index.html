@@ -1,0 +1,698 @@
+<!DOCTYPE html >
+<html >
+<head id="Head1"><title>
+	广东作家网
+</title>
+    
+    
+</head>
+<body>
+      <div style="clear:both;"></div>
+      
+     <div style="width:1100px;margin:0 auto;">
+       
+    <script src="js/jquery1.7.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var oDiv = $("#play");  //外部盒子
+            var count = $("#play ul li").length;  //内部图片数量
+            var countwidth = $("#play ul li").width();  //图片边框宽度
+            var oUl = $("#play ul").css("width", count * countwidth);  //ul li总宽度
+            var now = 0;
+            var next = $("#next");
+            var prev = $("#prev");
+            //点击按钮数量
+            for (var i = 0; i < count; i++) {
+                $("#play ol").append("<li>" + Number(i + 1) + "</li>");
+                $("#play ol li:first").addClass("active");
+            }
+            //左右点击图片获取
+            var nI = $("#play ul li:nth-child(2)").find("img").attr("src");
+            $(".nextImg img").attr("src", nI);
+            var pI = $("#play ul li:last-child").find("img").attr("src");
+            $(".prevImg img").attr("src", pI);
+            //按钮点击事件
+            var aBtn = $("#play ol li");
+            aBtn.each(function (index) {
+                $(this).click(function () {
+                    clearInterval(timer);
+                    tab(index);
+                    nextImg();
+                    prevImg();
+                    timer = setInterval(autoRun, 5000);
+                });
+            });
+            //图片循环事件
+            function tab(index) {
+                now = index;
+                aBtn.removeClass("active");
+                aBtn.eq(index).addClass("active");
+                oUl.stop(true, false).animate({ "left": -countwidth * now }, 500);
+            }
+            //下一张按钮图片切换
+            function nextImg() {
+                var d = $("#play ul li").find("img").eq(now + 1).attr("src");
+                var nI = $("#play ul li:nth-child(1)").find("img").attr("src");
+                $(".nextImg").find("img").attr("src", d);
+                if (now == count - 1) {
+                    $(".nextImg").find("img").attr("src", nI);
+                }
+            }
+            //上一张图片按钮切换
+            function prevImg() {
+                var f = $("#play ul li").find("img").eq(now - 1).attr("src");
+                $(".prevImg").find("img").attr("src", f);
+            }
+
+            //下一张点击事件
+            next.click(function () {
+                clearInterval(timer);
+                now++;
+                if (now == count) {
+                    now = 0;
+                }
+                tab(now);
+                nextImg();
+                prevImg();
+                timer = setInterval(autoRun, 5000);
+            });
+            //上一张点击事件
+            prev.click(function () {
+                clearInterval(timer);
+                now--;
+                if (now == -1) {
+                    now = count - 1;
+                }
+                tab(now);
+                nextImg();
+                prevImg();
+                timer = setInterval(autoRun, 5000);
+            });
+            //自动轮播定义
+            function autoRun() {
+                now++;
+                if (now == count) {
+                    now = 0;
+                }
+                tab(now);
+                nextImg();
+                prevImg();
+            };
+            var timer = setInterval(autoRun, 5000);
+        });
+</script>
+    <script type="text/javascript">
+       
+    </script>
+    <style type="text/css">
+    /* play */
+    .play{width:398px;height:270px;overflow:hidden;position:relative;margin:0px auto;}
+    .play ol{position:absolute;bottom:31px;z-index:99999;right:5px; }
+    .play ol li{list-style:none;float:left;height:25px;width:25px;display:inline;cursor:pointer;margin-left:5px; text-align:center; line-height:25px; background-color:#444444;color:#fff;font-size:12px;}
+    .play ol li.active{font-weight:bold;color:#ffffff;background-color:#E5B07C;position:relative;}
+    .play ul{position:absolute;top:0;left:0;z-index:1;padding:0;margin:0;}
+    .play ul li{width:398px;height:270px;float:left;list-style:none; }
+    .play ul img{float:left;height:100%;width:100%; border:none;}
+    .play ul div{height:30px;line-height:30px;width:393px;overflow:hidden;color:#fff;padding-left:5px;position:absolute;bottom:0;background:#5E5E5E; filter:alpha(opacity=50);-moz-opacity:0.7; -khtml-opacity: 0.7;opacity: 0.7;}
+    .play ul p{height:30px;line-height:30px;width:380px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;} 
+ 
+    
+    
+    .lhx p{background:url(images/pic5.png) no-repeat 0 7px;padding:1px 0 7px 14px;color:#666;height:38px;line-height:22px; overflow:hidden;margin-top:5px;margin-bottom:5px;}
+    .lhx a{color:#666;font-size:14px;}
+    .lhx a:hover{color:#CE0808;}
+    
+    .news p{background:url(images/pic5.png) no-repeat 0 7px;padding:1px 0 0px 14px;color:#666;max-height:40px;margin-bottom:3px;line-height:22px; overflow:hidden;}
+    .news a{color:#666;font-size:14px;}
+    .news a:hover{color:#CE0808;}
+    
+    
+    .anone{color:#873D0B;}
+    .anone:hover{color:#873D0B;}
+    img{border:none;}
+    </style>
+
+
+
+    <div style="width:1100px;height:472px;">
+    <div style="float:left;width:398px;height:465px;border:1px solid #EBC199;">
+    <div class="play" id="play" >
+	<ol></ol>
+	<ul>
+		
+ 
+        <li> <a href="Show.aspx?wzid=12630">  <img alt="" src="picture/2015122117082348.jpg" /></a>
+        <div><p>“文学·现场”第29场：散文：从传统到新变</p></div>
+        </li>
+        
+        <li> <a href="Show.aspx?wzid=12592">  <img alt="" src="picture/2015112718580728.jpg" /></a>
+        <div><p>首届广东省“有为杯”报告文学奖颁奖典礼举行</p></div>
+        </li>
+        
+        <li> <a href="Show.aspx?wzid=12588">  <img alt="" src="picture/2015120910530924.jpg" /></a>
+        <div><p>15位文艺家获第二届广东文艺终身成就奖,胡春华朱小丹会见获奖文艺家</p></div>
+        </li>
+        
+        <li> <a href="Show.aspx?wzid=12582">  <img alt="" src="picture/2015120418484323.jpg" /></a>
+        <div><p>广东作家应邀前往吉隆坡与马来西亚文化界进行交流</p></div>
+        </li>
+        
+	</ul>
+</div>
+    
+    <div style="float:left;width:196px;height:280px;">
+    <p style="height:30px;line-height:30px; text-align:center; color:#873D0B;border-bottom:1px dashed #dcdcdc;font-weight:bold;font-size:16px;margin-right:5px;">精彩推荐</p>
+    <div class="lhx" style="padding:5px;width:185px;height:155px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=60" title='《广东省作家协会入会申请表》和入会申请须知（2009年）'>《广东省作家协会入会申请表》和入会申请须知（2009年）</a></p>
+        
+        <p><a href="Show.aspx?wzid=12693" title='余华:我是怎么从牙医成为作家的 测试长度 看看多长 可以支持'>余华:我是怎么从牙医成为作家的 测试长度 看看多长 可以支持</a></p>
+        
+        <p><a href="Show.aspx?wzid=12692" title='34 咏春无须赞改革，且用我手写我心666'>34 咏春无须赞改革，且用我手写我心666</a></p>
+        
+    </div>
+    </div>
+    <div style="float:right;width:196px;height:200px;">
+    <p style="height:30px;line-height:30px; text-align:center; color:#666;border-bottom:1px dashed #dcdcdc;font-weight:bold;font-size:16px;margin-left:5px;">
+   <a class="anone" href="Article_list.aspx?tyid=4">作协动态</a> 
+    </p>
+    <div class="lhx" style="padding:5px;width:185px;height:155px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12639" title='广东文学院签约作家高级研修班在穗举行'>广东文学院签约作家高级研修班在穗举行</a></p>
+        
+        <p><a href="Show.aspx?wzid=12467" title='驻省政府武警中队赠送我会锦旗'>驻省政府武警中队赠送我会锦旗</a></p>
+        
+        <p><a href="Show.aspx?wzid=12426" title='省作协召开专业委员会工作会议&nbsp;综述'>省作协召开专业委员会工作会议&nbsp;综述</a></p>
+        
+    </div>
+    </div>
+    </div>
+    <div style="float:left;width:420px;height:467px;margin:0 15px;background:#F7F2EC; overflow:hidden;">
+        
+      <div style=" height:125px;width:410px;margin-top:10px; margin-bottom:20px;">
+     <p class="wxzt" style="font-size:21px;padding:2px 5px;width:410px;color:#964B08; line-height:30px;">
+    <a href="Show.aspx?wzid=12652" title='中办国办出台文件&nbsp;规范全国性文艺评奖制度' style="">中办国办出台文件&nbsp;规范全国性文艺评奖制度</a>
+    </p>
+     <div style="height:85px;width:410px; overflow:hidden;color:#666;line-height:24px; text-align:left; font-size:13px;padding:5px;">
+     新华社北京12月28日电 28日，中共中央办公厅、国务院办公厅印发的《关于全国性文艺评奖制度改革的意见》公开发布，要求各地区各部门结合实际贯彻执行，落实文艺工作座谈会精神，促进优秀<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12652'>...【详细】</a>
+      </div>
+  
+    </div>
+        
+      <div style=" height:125px;width:410px;margin-top:10px; margin-bottom:20px;">
+     <p class="wxzt" style="font-size:21px;padding:2px 5px;width:410px;color:#964B08; line-height:30px;">
+    <a href="Show.aspx?wzid=12615" title='新新实力作家作品研讨会在穗举行' style="">新新实力作家作品研讨会在穗举行</a>
+    </p>
+     <div style="height:85px;width:410px; overflow:hidden;color:#666;line-height:24px; text-align:left; font-size:13px;padding:5px;">
+     12月19日下午，由广东省作协主办、广东省文学院承办的“新新实力作家作品研讨会”在穗举办。
+参加研讨会的有中国作协党组成员、书记处书记阎晶明，鲁迅文学院常务副院长李一鸣，《南方文<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12615'>...【详细】</a>
+      </div>
+  
+    </div>
+        
+      <div style=" height:125px;width:410px;margin-top:10px; margin-bottom:20px;">
+     <p class="wxzt" style="font-size:21px;padding:2px 5px;width:410px;color:#964B08; line-height:30px;">
+    <a href="Show.aspx?wzid=12591" title='岭南大家，艺术长青——第二届广东文艺终身成就奖特刊' style="">岭南大家，艺术长青——第二届广东文艺终身成就奖特刊</a>
+    </p>
+     <div style="height:85px;width:410px; overflow:hidden;color:#666;line-height:24px; text-align:left; font-size:13px;padding:5px;">
+     南方日报
+
+
+
+
+
+
+德艺双馨,炼就大家
+
+
+《论语·里仁》有云：“君子怀德，小人怀土。”自古以来，中华民族几千年传承下来的优良品质都离不开道德修养作为根基。有<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12591'>...【详细】</a>
+      </div>
+  
+    </div>
+        
+    </div>
+
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:465px;">
+    <div style="height:3px; background:#964b08;"></div>
+    <a href="List.aspx?tyid=6" style=" text-decoration:none;">
+   <div style="background:url(images/20160331164822667.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">公告与下载</span>
+    </div>
+    </a>   
+    <div class="ztbd" style="padding:8px;width:232px;height:400px; overflow:hidden;">
+      
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12640" title='关于2015年度文学创作一、二、三级作家资格评审结果公示的函'>关于2015年度文学创作一、二、三级作家资格评审结果公示的函</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12616" title='“2015广东省高等院校校园作家杯”终评获奖作品目录公示'>“2015广东省高等院校校园作家杯”终评获奖作品目录公示</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12606" title='广东省作家协会关于2015年公开遴选公务员拟遴选人员的公示'>广东省作家协会关于2015年公开遴选公务员拟遴选人员的公示</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12520" title='2015年广东省作家协会公开遴选公务员资格复审及面试公告'>2015年广东省作家协会公开遴选公务员资格复审及面试公告</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12462" title='广东省作家协会2015年新会员&nbsp;名单'>广东省作家协会2015年新会员&nbsp;名单</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12428" title='关于组织2015年文学创作专业科目和选修科目网上培训的通知'>关于组织2015年文学创作专业科目和选修科目网上培训的通知</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12354" title='广东省2015年公开遴选公务员公告'>广东省2015年公开遴选公务员公告</a></p>
+        
+        <p style="margin-bottom:10px;"><a href="Show.aspx?wzid=12334" title='首届广东省“有为杯”报告文学奖评奖结果公示'>首届广东省“有为杯”报告文学奖评奖结果公示</a></p>
+        
+    </div>
+    
+     </div>
+ 
+</div>
+    <div style="clear:both;"></div>
+   
+    <div style="margin-top:10px;width:1100px;height:100px;">
+    <a href="http://baidu.com"><img src="picture/20160331164258988.png" style="width:833px;height:100px;border:none;float:left;" /></a>
+    <a href=""> <img src="picture/20160331164720218.png" style="width:250px;height:100px;float:right;"></a>
+    </div>
+
+    <div style="clear:both;"></div>
+    <div style="width:840px;margin-top:10px;float:left;">
+    <div style="float:left;">
+    <div style="width:580px;float:left;height:585px;margin-right:20px; overflow :hidden;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">    
+    <a class="anone" href="Article_list.aspx?tyid=7">文坛新闻</a>
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span> 
+     <div style="float:left;background:#EFE7DC;width:580px;height:4px;"></div>
+    </p>
+            
+        
+    <div style="width:580px;height:130px;padding:10px 5px 0 5px;">
+    <div style="float:left;width:150px;height:130px;">
+    <img src="picture/2015113010250399.jpg" style="width:150px;height:110px;margin-top:8px;" />
+    </div>
+    <div style="width:420px;float:left;padding-left:10px;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+   <a href="Show.aspx?wzid=12572" style="color:#873D0B;">汕头市作家协会举办文学沙龙畅谈散文创作</a>
+    </p>
+    <div style="height:86px;width:410px; overflow:hidden;color:#666;font-size:13px;padding:5px; line-height:22px;">
+    11月29日下午，汕头市作家协会每月一次的文学沙龙活动如期在协华大厦作家之家举行，本期文学沙龙的主题是“我的散文观”，由作协散文创作委员会主持，二十多位作协会员和本市文学爱好者参加了活动，大家就散文创作的有关问题展开座谈讨论。 会上，老中青<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12572'>...【详细】</a>
+      </div>
+    </div>
+    <div style="margin-top:-8px;width:575px;border-bottom:1px dashed #dcdcdc;"></div>
+    </div>
+    
+            
+        
+    <div style="width:580px;height:130px;padding:10px 5px 0 5px;">
+    <div style="float:left;width:150px;height:130px;">
+    <img src="picture/2015112709470293.jpg" style="width:150px;height:110px;margin-top:8px;" />
+    </div>
+    <div style="width:420px;float:left;padding-left:10px;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+   <a href="Show.aspx?wzid=12571" style="color:#873D0B;">广东省首个“文学之城”落户南海</a>
+    </p>
+    <div style="height:86px;width:410px; overflow:hidden;color:#666;font-size:13px;padding:5px; line-height:22px;">
+    佛山日报　
+
+　　全国“名社名刊名编”笔会是当今中国文坛的著名文学活动，9年来，笔会为广东作家提供了与全国名社名刊名编面对面交流沟通的机会，对推动广东文学走向全国，出作品、出人才具有重大意义，被称为广东文学创作的“广交会”。昨日，作家出<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12571'>...【详细】</a>
+      </div>
+    </div>
+    <div style="margin-top:-8px;width:575px;border-bottom:1px dashed #dcdcdc;"></div>
+    </div>
+    
+            
+        
+    <div style="width:580px;height:130px;padding:10px 5px 0 5px;">
+    <div style="float:left;width:150px;height:130px;">
+    <img src="picture/2015111917564506.jpg" style="width:150px;height:110px;margin-top:8px;" />
+    </div>
+    <div style="width:420px;float:left;padding-left:10px;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+   <a href="Show.aspx?wzid=12593" style="color:#873D0B;">“广东诗人北大行”活动隆重举行</a>
+    </p>
+    <div style="height:86px;width:410px; overflow:hidden;color:#666;font-size:13px;padding:5px; line-height:22px;">
+    北京大学诗歌研究院院长陈晓明教授主持
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 11月15日下午，“新诗百年”系列活动“我看清了风的形状——2015广东诗人北大行诗歌研讨会”在北京大学人文学苑1号报告厅举行。杨克等著名广东诗人<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12593'>...【详细】</a>
+      </div>
+    </div>
+    <div style="margin-top:-8px;width:575px;border-bottom:1px dashed #dcdcdc;"></div>
+    </div>
+    
+            
+        
+    <div style="width:580px;height:130px;padding:10px 5px 0 5px;">
+    <div style="float:left;width:150px;height:130px;">
+    <img src="picture/2015110912111817.jpg" style="width:150px;height:110px;margin-top:8px;" />
+    </div>
+    <div style="width:420px;float:left;padding-left:10px;">
+    <p style="height:30px;line-height:30px;color:#666;font-weight:bold;font-size:16px;margin-left:5px;">
+   <a href="Show.aspx?wzid=12504" style="color:#873D0B;">汕头作协成立散文创作委员会，文学活动开展活跃</a>
+    </p>
+    <div style="height:86px;width:410px; overflow:hidden;color:#666;font-size:13px;padding:5px; line-height:22px;">
+    10月7日，汕头市作家协会举行散文创作委员会成立暨创作座谈会，任命谢娇兰为主任，吴芃、杜祝珩、鲁飞为副主任。市作协主席团成员、嘉宾及全市各区县80多位会员出席参加了会议。
+ 会议上，作家们分别从自身创作体会、当地创作状态等方面，提出真知灼<a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12504'>...【详细】</a>
+      </div>
+    </div>
+    <div style="margin-top:-8px;width:575px;border-bottom:1px dashed #dcdcdc;"></div>
+    </div>
+    
+    
+
+    </div>
+
+
+    <div style="width:230px;float:left;">
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="List.aspx?tyid=8">广东文坛新闻</a>
+     <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span> 
+    <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+     <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=60" title='《广东省作家协会入会申请表》和入会申请须知（2009年）'>《广东省作家协会入会申请表》和入会申请须知（2009年）</a></p>
+        
+        <p><a href="Show.aspx?wzid=12676" title='肇庆市作家协会换届'>肇庆市作家协会换届</a></p>
+        
+        <p><a href="Show.aspx?wzid=12641" title='深圳要建文学之城&nbsp;要有一流作家作品'>深圳要建文学之城&nbsp;要有一流作家作品</a></p>
+        
+        <p><a href="Show.aspx?wzid=12603" title='王蒙、陈国凯、金敬迈、吕雷……萧殷与他培养的作家们'>王蒙、陈国凯、金敬迈、吕雷……萧殷与他培养的作家们</a></p>
+        
+    </div>
+    </div>
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="List.aspx?tyid=9">国内文坛新闻</a>
+     <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span> 
+   <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+     <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12677" title='2016新年文化活动丰富多彩'>2016新年文化活动丰富多彩</a></p>
+        
+        <p><a href="Show.aspx?wzid=12651" title='中国作协党组召开“三严三实”专题民主生活会'>中国作协党组召开“三严三实”专题民主生活会</a></p>
+        
+        <p><a href="Show.aspx?wzid=12648" title='激情奏响时代凯歌——2015年文艺发展成就报告'>激情奏响时代凯歌——2015年文艺发展成就报告</a></p>
+        
+        <p><a href="Show.aspx?wzid=12647" title='2015年中国报告文学优秀作品排行榜揭晓'>2015年中国报告文学优秀作品排行榜揭晓</a></p>
+        
+    </div>
+    </div>
+    <div style="float:right;width:230px;height:195px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;">
+    <a class="anone" href="List.aspx?tyid=10">海外文坛新闻</a> 
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px;position: relative;top:3px;"></span> 
+    <div style="float:left;background:#EFE7DC;width:230px;height:4px;"></div>
+    </p>
+    <div class="news" style="padding:5px;margin-top:3px;padding-left:0px;width:230px;height:155px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12583" title='丹麦公共图书馆体系建设成就“阅读之国”'>丹麦公共图书馆体系建设成就“阅读之国”</a></p>
+        
+        <p><a href="Show.aspx?wzid=12573" title='中国文学步入歌德故乡&nbsp;——《人民文学》德文版面世'>中国文学步入歌德故乡&nbsp;——《人民文学》德文版面世</a></p>
+        
+        <p><a href="Show.aspx?wzid=12534" title='多国文化艺术界为巴黎祈祷'>多国文化艺术界为巴黎祈祷</a></p>
+        
+        <p><a href="Show.aspx?wzid=12437" title='第九届教科文组织青年论坛开幕'>第九届教科文组织青年论坛开幕</a></p>
+        
+    </div>
+    </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div style="margin-top:10px;width:833px;height:100px;margin-top:10px;">
+    <a href="http://www.sougou.com"><img src="picture/20160331164531679.png" style="width:833px;height:100px;border:none;float:left;" /></a>
+    </div>
+     </div>
+    
+    <div style="width:835px;float:left;margin-top:10px;">  
+    <div style="float:left;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="List.aspx?tyid=12">文学评论</a>
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span> 
+   <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12650" title='文学的拯救与升华——才情女作家陈华清及其文学创作'>文学的拯救与升华——才情女作家陈华清及其文学创作</a></p>
+        
+        <p><a href="Show.aspx?wzid=12548" title='诗歌遇上互联网，境遇会改变吗？'>诗歌遇上互联网，境遇会改变吗？</a></p>
+        
+        <p><a href="Show.aspx?wzid=12442" title='中国科幻文学需要新力量'>中国科幻文学需要新力量</a></p>
+        
+        <p><a href="Show.aspx?wzid=12356" title='无穷的地面在我们脚下——2014年广东小说印象'>无穷的地面在我们脚下——2014年广东小说印象</a></p>
+        
+        <p><a href="Show.aspx?wzid=12328" title='长篇小说《烽火珠玑巷》艺术特色'>长篇小说《烽火珠玑巷》艺术特色</a></p>
+        
+        <p><a href="Show.aspx?wzid=12327" title='英雄主义：时代稀缺的精神资源——读陈至明长篇小说《烽火珠玑巷》'>英雄主义：时代稀缺的精神资源——读陈至明长篇小说《烽火珠玑巷》</a></p>
+        
+        <p><a href="Show.aspx?wzid=12311" title='迎接中国科幻文学的世界时代'>迎接中国科幻文学的世界时代</a></p>
+        
+        <p><a href="Show.aspx?wzid=12289" title='存在的见证'>存在的见证</a></p>
+        
+    </div>
+    </div>
+    <div style="float:right;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px; color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="List.aspx?tyid=13">文学创作座谈会</a>
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span> 
+  <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12465" title='坚持以人民为中心的创作导向'>坚持以人民为中心的创作导向</a></p>
+        
+        <p><a href="Show.aspx?wzid=12441" title='名家三苏故里论剑——在场主义与中国散文的转型'>名家三苏故里论剑——在场主义与中国散文的转型</a></p>
+        
+        <p><a href="Show.aspx?wzid=12374" title='通过个人性抓住时代特质'>通过个人性抓住时代特质</a></p>
+        
+        <p><a href="Show.aspx?wzid=12303" title='抗战文学：如何与世界对话？'>抗战文学：如何与世界对话？</a></p>
+        
+        <p><a href="Show.aspx?wzid=12302" title='扎根本土文化&nbsp;扩展评论视野——2015年第六届广州市青年文艺评论讲座发言摘登'>扎根本土文化&nbsp;扩展评论视野——2015年第六届广州市青年文艺评论讲座发言摘登</a></p>
+        
+        <p><a href="Show.aspx?wzid=12190" title='内在性与精神叙事需要更多关注'>内在性与精神叙事需要更多关注</a></p>
+        
+        <p><a href="Show.aspx?wzid=12056" title='文学作品：惟有精品留其名'>文学作品：惟有精品留其名</a></p>
+        
+        <p><a href="Show.aspx?wzid=11949" title='2015年广东网络文学高峰论坛&nbsp;对话实况'>2015年广东网络文学高峰论坛&nbsp;对话实况</a></p>
+        
+    </div>
+    </div>
+    <div style="float:left;width:430px;height:270px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="List.aspx?tyid=14">研讨专题</a> 
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span> 
+    <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:10px;padding-left:0px;width:410px;height:227px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12494" title='网络文学创作也要有爱国情怀'>网络文学创作也要有爱国情怀</a></p>
+        
+        <p><a href="Show.aspx?wzid=12379" title='网络文学不再生产“大神”？'>网络文学不再生产“大神”？</a></p>
+        
+        <p><a href="Show.aspx?wzid=12378" title='网络文学也疯狂&nbsp;IP炒作从影视圈走向财经圈'>网络文学也疯狂&nbsp;IP炒作从影视圈走向财经圈</a></p>
+        
+        <p><a href="Show.aspx?wzid=12358" title='网络文艺须勇做时代战士'>网络文艺须勇做时代战士</a></p>
+        
+        <p><a href="Show.aspx?wzid=12304" title='90后作者:是作家还是全方位艺人'>90后作者:是作家还是全方位艺人</a></p>
+        
+        <p><a href="Show.aspx?wzid=12084" title='向网络文学要精品'>向网络文学要精品</a></p>
+        
+        <p><a href="Show.aspx?wzid=12049" title='网络文学集团疯狂抢人“造神”&nbsp;网站给作者涨薪'>网络文学集团疯狂抢人“造神”&nbsp;网站给作者涨薪</a></p>
+        
+        <p><a href="Show.aspx?wzid=11934" title='广东网络文学的主流化之路'>广东网络文学的主流化之路</a></p>
+        
+    </div>
+    </div>
+    <div style="float:right;width:405px;height:270px;">
+    <p style="height:30px;line-height:30px;  color:#666;font-weight:bold;font-size:15px;margin-right:10px;">
+    <a class="anone" href="Press.aspx?tyid=21">报刊中心</a>
+    <span style="background:url(images/pic1.png) no-repeat;padding:0 0 0 40px;margin-left:10px; position:relative;top:3px;"></span> 
+    <div style="float:left;background:#EFE7DC;width:400px;height:4px;"></div>
+    </p>
+     <p style="height:30px;line-height:38px;color:#666;font-size:12px;font-weight:bold;margin-right:10px;margin-left:10px;">
+    <a class="anone" href="Press_list.aspx?tyid=23" style="margin-right:30px;">作品</a> 
+    <a class="anone" href="Press_list.aspx?tyid=169" style="margin-right:30px;">少男少女</a>
+    <a class="anone" href="Press_list.aspx?tyid=22" style="margin-right:30px;">新世纪文坛报</a> 
+    <a class="anone" href="Press_list.aspx?tyid=24" style="margin-right:30px;">人间</a> 
+    <a class="anone" href="Press_list.aspx?tyid=170">作品网络版</a>
+    </p>
+    <div class="ztbd" style="padding:5px;margin-top:7px;padding-left:0px;width:410px;height:197px; overflow:hidden;">
+      
+        <p><a href="Show.aspx?wzid=12638" title='第九届全国“名社名刊名编”笔会在南海举办'>第九届全国“名社名刊名编”笔会在南海举办</a></p>
+        
+        <p><a href="Show.aspx?wzid=12637" title='广东诗人于北大寻找“新诗的源头”'>广东诗人于北大寻找“新诗的源头”</a></p>
+        
+        <p><a href="Show.aspx?wzid=12636" title='说点我写当代主旋律作品的体会'>说点我写当代主旋律作品的体会</a></p>
+        
+        <p><a href="Show.aspx?wzid=12635" title='鲁迅文学院“非虚构文学”作家班（广东&#8226;深圳）顺利结业'>鲁迅文学院“非虚构文学”作家班（广东&#8226;深圳）顺利结业</a></p>
+        
+        <p><a href="Show.aspx?wzid=12634" title='丽日下的惠东——广东作家赴惠东采风创作综述'>丽日下的惠东——广东作家赴惠东采风创作综述</a></p>
+        
+        <p><a href="Show.aspx?wzid=12633" title='吴伟鹏书记率队赴佛山调研'>吴伟鹏书记率队赴佛山调研</a></p>
+        
+        <p><a href="Show.aspx?wzid=12632" title='张建渝副主席率队到河源、惠州调研'>张建渝副主席率队到河源、惠州调研</a></p>
+        
+    </div>
+    </div>
+    
+    </div>
+    
+    
+    </div>
+
+
+    <div style="width:250px;margin-top:10px;float:right;">
+    <div style="width:250px;float:left;">
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:433px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="List.aspx?tyid=17" style=" text-decoration:none;">
+   <div style="background:url(images/20160401103118686.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">新书架</span>
+    </div>
+    </a>
+   <div style="width:250px;height:125px;">
+   <table cellspacing="0" id="ContentPlaceHolder1_FormView1" style="border-collapse:collapse;">
+	<tr>
+		<td colspan="2">
+    <div style="float:left;">
+   <img src="picture/65bf483cbb514b77aa9654c20bc880b8.gif" onerror="this.src='img/defualt.jpg'" style="width:90px;height:120px;margin-left:8px;margin-top:8px;" />
+   </div>
+    <div style="float:right;width:150px;padding-top:6px;height:50px;">
+    <p style="padding:0 5px;line-height:18px;"><a href="Show.aspx?wzid=12587" style="color:#873D0B;font-size:14px;font-weight:bold;" title='作家王哲珠推出长篇小说《长河》'>作家王哲珠推出长篇小说《长河》</a></p>
+    <p style="color:#666;font-size:12px;line-height:21px;width:140px;height:85px;padding:0 5px; overflow:hidden;">近日，我市青年女作家王哲珠近20万字的长篇小说《长河》，由花城出版社出版发行。 <a style='color:#873D0B;text-decoration:none;' href='Show.aspx?wzid=12587'>...【详细】</a></p>
+    </div>
+    </td>
+	</tr>
+</table>
+    </div>
+    <div class="ztbd" style="padding:8px;margin-top:2px;">
+      
+        <p><a href="Show.aspx?wzid=12575" title='诗人蓝紫诗集《低入尘埃》出版'>诗人蓝紫诗集《低入尘埃》出版</a></p>
+        
+        <p><a href="Show.aspx?wzid=12574" title='皮佳佳小说集《方死方生》出版'>皮佳佳小说集《方死方生》出版</a></p>
+        
+        <p><a href="Show.aspx?wzid=12511" title='陈华清新书《爱到卑微处，才是看清自己时》出版发行'>陈华清新书《爱到卑微处，才是看清自己时》出版发行</a></p>
+        
+        <p><a href="Show.aspx?wzid=12503" title='乡土不远&nbsp;&nbsp;情愫逶迤——序谢娇兰的《行走潮汕》'>乡土不远&nbsp;&nbsp;情愫逶迤——序谢娇兰的《行走潮汕》</a></p>
+        
+        <p><a href="Show.aspx?wzid=12364" title='李清明散文集《水乡月色》在台湾出版发行'>李清明散文集《水乡月色》在台湾出版发行</a></p>
+        
+        <p><a href="Show.aspx?wzid=12335" title='杨文丰自然伦理散文集《自然书》出版'>杨文丰自然伦理散文集《自然书》出版</a></p>
+        
+    </div>
+    
+     </div>
+     <div style="float:left;border:1px solid #EBC199;width:248px;height:400px;margin-top:15px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="List.aspx?tyid=16" style=" text-decoration:none;">
+   <div style="background:url(images/20160331164850375.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">作家动态</span>
+    </div>
+    </a>
+   
+    <div class="ztbd" style="padding:8px;">
+      
+        <p><a href="Show.aspx?wzid=12649" title='广东诗人赖廷阶获《诗选刊》2015年度诗人奖'>广东诗人赖廷阶获《诗选刊》2015年度诗人奖</a></p>
+        
+        <p><a href="Show.aspx?wzid=11899" title='文学：让我爱恨交加'>文学：让我爱恨交加</a></p>
+        
+        <p><a href="Show.aspx?wzid=11893" title='杨克：我不想当超人，还是做“神笔马良”吧'>杨克：我不想当超人，还是做“神笔马良”吧</a></p>
+        
+        <p><a href="Show.aspx?wzid=11664" title='林渊液本土题材散文获得全国征文一等奖'>林渊液本土题材散文获得全国征文一等奖</a></p>
+        
+        <p><a href="Show.aspx?wzid=11469" title='童话不仅要“美”还要“思”——陈诗哥出版新书《童话之书》、《故事马上开始》'>童话不仅要“美”还要“思”——陈诗哥出版新书《童话之书》、《故事马上开始》</a></p>
+        
+        <p><a href="Show.aspx?wzid=11462" title='践行群众路线的楷模——吕雷与基层文艺工作者心连心'>践行群众路线的楷模——吕雷与基层文艺工作者心连心</a></p>
+        
+        <p><a href="Show.aspx?wzid=11456" title='吕雷：中国需要这样的作家'>吕雷：中国需要这样的作家</a></p>
+        
+        <p><a href="Show.aspx?wzid=11454" title='隔海遥送吕雷师'>隔海遥送吕雷师</a></p>
+        
+    </div>
+    
+     </div>
+     </div>
+    
+    <div style="float:right;width:250px;margin-top:15px;">
+    <div style="float:left;border:1px solid #EBC199;width:248px;height:400px; overflow:hidden;">
+    <div style="height:3px; background:#964b08;"></div>
+     <a href="List.aspx?tyid=608" style=" text-decoration:none;">
+   <div style="background:url(images/20160331164901342.png) no-repeat;height:46px;width:100%;font-size:18px;font-weight:bold;color:#777;line-height:46px;">
+    <span style="padding-left:20px;">文学现场</span>
+    </div>
+    </a>
+   
+    <div class="ztbd" style="padding:8px;">
+      
+        <p><a href="Show.aspx?wzid=12631" title='“文学·现场”第29场：散文从传统到新变'>“文学·现场”第29场：散文从传统到新变</a></p>
+        
+        <p><a href="Show.aspx?wzid=12563" title='“文学&nbsp;现场”第28场：新媒体环境中被分解的文学世界'>“文学&nbsp;现场”第28场：新媒体环境中被分解的文学世界</a></p>
+        
+        <p><a href="Show.aspx?wzid=12419" title='“文学&nbsp;现场”&nbsp;第27场：黄慕松浩气长存天地间、学术界精耕释放正能量'>“文学&nbsp;现场”&nbsp;第27场：黄慕松浩气长存天地间、学术界精耕释放正能量</a></p>
+        
+        <p><a href="Show.aspx?wzid=12400" title='“文学&nbsp;现场”第26场&nbsp;儿童文学三人谈'>“文学&nbsp;现场”第26场&nbsp;儿童文学三人谈</a></p>
+        
+        <p><a href="Show.aspx?wzid=12257" title='“文学·现场”第25场&nbsp;文学与电影的离合'>“文学·现场”第25场&nbsp;文学与电影的离合</a></p>
+        
+        <p><a href="Show.aspx?wzid=12222" title='“文学&#8226;现场”第24期让当代诗歌回归诗歌本源'>“文学&#8226;现场”第24期让当代诗歌回归诗歌本源</a></p>
+        
+        <p><a href="Show.aspx?wzid=12172" title='“文学&#8226;现场”第23场：&nbsp;&nbsp;《变形记》：地球一样大的中篇小说'>“文学&#8226;现场”第23场：&nbsp;&nbsp;《变形记》：地球一样大的中篇小说</a></p>
+        
+    </div>
+    
+     </div>
+    
+
+    </div>
+    
+   </div>
+ 
+
+        </div>
+    <div style="clear:both;height:20px"></div>
+
+
+    
+    <div class="yq" style="width:1100px;margin:0 auto;color:#666;padding:3px 10px;">
+    <span>友情链接：</span>
+        
+          <span><a href='http://www.rjzzs.com/' target="_blank">人间杂志社</a></span>
+        
+          <span><a href='http://www.gdzuoxie.com/Show.aspx?wzid=84' target="_blank">全国各省市作协官网</a></span>
+        
+          <span><a href='http://www.chinawriter.com.cn/' target="_blank">中国作家网</a></span>
+        
+          <span><a href='http://yuedu.163.com/book?pek=1' target="_blank">网易读书频道</a></span>
+        
+          <span><a href='http://www.gdzuoxie.com/Show.aspx?wzid=81' target="_blank">国内各大文学网站论坛博客</a></span>
+        
+          <span><a href='http://www.gdzuoxie.com/Show.aspx?wzid=76' target="_blank">广东各地市作协文联官网</a></span>
+        
+          <span><a href='http://www.gdzuoxie.com/Show.aspx?wzid=74' target="_blank">广东各大文学网络论坛博客</a></span>
+        
+    </div>
+      <div style="clear:both;"></div>
+    <div style="width:1100px;margin-top:10px;">
+    <div style="background:#E5B07D;height:5px;width:1100px;"></div>
+    <div style="background:#FBF9F6;height:120px;width:1100px; text-align:center;color:#666;font-size:14px;">
+   
+    <p style="padding-top:20px;">关于广东作家协会 | 投诉建议 | <a href="admin/Login.aspx">管理入口</a></p>
+  
+    <p style="padding-top:10px;">©广东省作家协会版权所有 粤ICP备06014976号</p>
+    
+    <p style="padding-top:10px;">Copyright©  2005-2016，All Rights Reserved 
+    </div>
+    </div>
+
+    
+ 
+     
+    </div>
+</body>
+</html>
